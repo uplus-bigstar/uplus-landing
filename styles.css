@@ -407,6 +407,7 @@ input.finder__select { cursor: text; }
 }
 
 /* ============ responsive ============ */
+.br-m { display: none; }
 @media (max-width: 1000px) {
   .hero__text { max-width: 56%; }
   .hero__title { font-size: 30px; }
@@ -415,12 +416,36 @@ input.finder__select { cursor: text; }
   .web-header__nav { display: none; }
 }
 @media (max-width: 600px) {
-  .hero__text { max-width: 64%; }
-  .hero__title { font-size: 20px; margin: 10px 0 8px; }
-  .hero__sub { display: none; }
+  .br-m { display: inline; }
+  /* hero: taller KV, banner fills via cover with characters kept in view */
+  .hero { min-height: 320px; }
+  .hero__bg { height: 320px; object-fit: cover; object-position: 80% center; }
+  .hero__inner {
+    padding: 0 20px; align-items: center;
+    background: linear-gradient(95deg, rgba(255,255,255,.95) 20%, rgba(255,255,255,.72) 42%, rgba(255,255,255,0) 66%);
+  }
+  .hero__text { max-width: 70%; }
+  .hero__tag { font-size: 12px; padding: 7px 13px; }
+  .hero__title { font-size: 23px; margin: 12px 0 9px; }
+  .hero__sub { display: block; font-size: 13px; line-height: 1.45; }
+
+  /* crumb step bar: keep on one tidy row, no odd wrapping */
+  .crumb { padding: 16px 16px 0; gap: 8px; flex-wrap: wrap; }
+  .crumb__back { font-size: 13px; padding: 6px 8px 6px 4px; }
+  .crumb__steps { gap: 5px; }
+  .crumb__step { font-size: 11px; gap: 4px; white-space: nowrap; }
+  .crumb__num { width: 18px; height: 18px; font-size: 10px; }
+  .crumb__line { width: 10px; }
+
   .step-head__q { font-size: 26px; }
   .section { padding: 36px 0 56px; }
   .pgrid--4, .pgrid--3 { grid-template-columns: 1fr; }
   .choices { flex-direction: column; align-items: stretch; }
   .choice { max-width: none; }
+}
+@media (max-width: 380px) {
+  /* very narrow phones: stack crumb so steps don't crowd the back button */
+  .crumb { flex-direction: column; align-items: stretch; }
+  .crumb__spacer { display: none; }
+  .crumb__steps { justify-content: center; }
 }
