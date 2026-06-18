@@ -12,7 +12,7 @@ function WebHeader({ onHome }) {
   return (
     <header className="web-header">
       <div className="web-header__inner">
-        <img className="web-header__logo" src="assets/u-logo.png" alt="U+" style={{ cursor: "pointer" }} onClick={onHome} />
+        <img className="web-header__logo" src="u-logo.png" alt="U+" style={{ cursor: "pointer" }} onClick={onHome} />
         <span className="web-header__spacer" />
         <div className="web-header__actions">
           <button className="hbtn hbtn--dark" onClick={() => window.open("https://www.lguplus.com/support/store-address", "_blank", "noopener")}>매장방문 예약</button>
@@ -27,7 +27,7 @@ function WebFooter() {
   return (
     <footer className="web-footer">
       <div className="web-footer__inner">
-        <img src="assets/u-logo.png" alt="U+" />
+        <img src="u-logo.png" alt="U+" />
         <span>본 페이지는 시안용 예시이며, 월 요금·혜택은 부가세 포함 / 가입 조건에 따라 달라질 수 있습니다.</span>
       </div>
     </footer>

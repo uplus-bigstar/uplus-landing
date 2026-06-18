@@ -54,7 +54,7 @@ function CarrierScreen({ go, back }) {
           <div className="choices choices--wide">
             <button className="choice carrier" onClick={() => go("mobileProducts", { carrier: "U+" })}>
               <span className="choice__badge">그대로 쓰기</span>
-              <span className="carrier__logo"><img src="assets/u-logo.png" alt="U+" style={{ height: 34 }} /></span>
+              <span className="carrier__logo"><img src="u-logo.png" alt="U+" style={{ height: 34 }} /></span>
               <span>
                 <span className="carrier__name">U+ 사용 중</span>
                 <span className="carrier__note">기기변경 · 재약정</span>
@@ -64,7 +64,7 @@ function CarrierScreen({ go, back }) {
               <span className="choice__badge">U+로 갈아타기</span>
               <span className="carrier__logo carrier__logo--others">
                 <b className="lc-skt">SK<i>telecom</i></b>
-                <span className="carrier__logo-chip"><img src="assets/kt-logo.png" alt="KT" /></span>
+                <span className="carrier__logo-chip"><img src="kt-logo.png" alt="KT" /></span>
               </span>
               <span>
                 <span className="carrier__name">타 통신사 사용 중</span>

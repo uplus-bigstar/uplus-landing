@@ -101,7 +101,7 @@ const Confetti = () => (
 function Hero({ onCta }) {
   return (
     <div className="hero">
-      <img className="hero__bg" src="assets/hero-banner.png" alt="2026 세계 축구대회 & 호국보훈의 달 기념 페스티벌" />
+      <img className="hero__bg" src="hero-banner.png" alt="2026 세계 축구대회 & 호국보훈의 달 기념 페스티벌" />
       <div className="hero__inner">
         <div className="hero__text">
           <span className="hero__tag">U+ 6월 페스티벌</span>
@@ -141,7 +141,7 @@ function CrumbBar({ onBack, step }) {
 function InnerBg() {
   return (
     <div className="inner-bg" aria-hidden="true">
-      <img className="inner-bg__img" src="assets/inner-bg.png" alt="" />
+      <img className="inner-bg__img" src="inner-bg.png" alt="" />
     </div>
   );
 }

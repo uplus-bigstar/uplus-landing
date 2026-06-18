@@ -7,7 +7,7 @@
 const MOBILE_PRODUCTS = [
   {
     id: "s26ultra",
-    img: "assets/phone-s26ultra.png",
+    img: "phone-s26ultra.png",
     hot: true,
     tagline: "강력한 프라이버시 기능",
     name: "갤럭시 S26 Ultra",
@@ -26,7 +26,7 @@ const MOBILE_PRODUCTS = [
   },
   {
     id: "s26plus",
-    img: "assets/phone-s26plus.png",
+    img: "phone-s26plus.png",
     hot: false,
     tagline: "편리한 포토 어시스트",
     name: "갤럭시 S26+",
@@ -45,7 +45,7 @@ const MOBILE_PRODUCTS = [
   },
   {
     id: "s26",
-    img: "assets/phone-s26.png",
+    img: "phone-s26.png",
     hot: true,
     tagline: "혁신적인 에이전틱 AI",
     name: "갤럭시 S26",
@@ -64,7 +64,7 @@ const MOBILE_PRODUCTS = [
   },
   {
     id: "iphone17e",
-    img: "assets/phone-17e.png",
+    img: "phone-17e.png",
     hot: false,
     tagline: "기능과 실속 모두 가득",
     name: "iPhone 17e",
