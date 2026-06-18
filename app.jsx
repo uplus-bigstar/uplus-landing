@@ -8,18 +8,41 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "keyColor": "#FF2E98"
 }/*EDITMODE-END*/;
 
-function WebHeader({ onHome }) {
+function WebHeader({ onHome, onStore }) {
   return (
     <header className="web-header">
       <div className="web-header__inner">
         <img className="web-header__logo" src="u-logo.png" alt="U+" style={{ cursor: "pointer" }} onClick={onHome} />
         <span className="web-header__spacer" />
         <div className="web-header__actions">
-          <button className="hbtn hbtn--dark" onClick={() => window.open("https://www.lguplus.com/support/store-address", "_blank", "noopener")}>매장방문 예약</button>
+          <button className="hbtn hbtn--dark" onClick={onStore}>매장방문 예약</button>
           <button className="hbtn" onClick={() => window.open("https://pf.kakao.com/_XlbVX/chat", "_blank", "noopener")}>상담 예약</button>
         </div>
       </div>
     </header>
+  );
+}
+
+const STORE_URL = "https://www.lguplus.com/support/store-address";
+function StoreModal({ onClose }) {
+  useE(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, []);
+  return (
+    <div className="modal" onClick={onClose}>
+      <div className="modal__panel" onClick={(e) => e.stopPropagation()}>
+        <div className="modal__bar">
+          <span className="modal__title">매장방문 예약 · 매장 찾기</span>
+          <button className="modal__close" onClick={onClose} aria-label="닫기">✕</button>
+        </div>
+        <div className="modal__body modal__body--finder">
+          <StoreFinder />
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -38,6 +61,7 @@ function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const preset = (window.SEASON_PRESETS[t.season] || window.SEASON_PRESETS["조화"]);
 
+  const [storeOpen, setStoreOpen] = useS(false);
   const [stack, setStack] = useS([{ screen: "landing", ctx: {} }]);
   const cur = stack[stack.length - 1];
   const go = (screen, ctx = {}) => { setStack((s) => [...s, { screen, ctx }]); };
@@ -75,11 +99,12 @@ function App() {
 
   return (
     <div>
-      <WebHeader onHome={home} />
+      <WebHeader onHome={home} onStore={() => setStoreOpen(true)} />
       {cur.screen !== "landing" && <InnerBg />}
       <main className="app-main">{view}</main>
       <WebFooter />
       <div className={"toast" + (toast ? " is-on" : "")}>{toast}</div>
+      {storeOpen && <StoreModal onClose={() => setStoreOpen(false)} />}
 
       <TweaksPanel title="Tweaks">
         <TweakSection label="6월 시즌 테마" />

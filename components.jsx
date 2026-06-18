@@ -146,7 +146,71 @@ function InnerBg() {
   );
 }
 
+/* ---------- store finder (custom, replaces external iframe) ---------- */
+function StoreFinder() {
+  const regions = window.STORE_REGIONS;
+  const def = window.STORE_DEFAULT;
+  const [sido, setSido] = useCS(def.sido);
+  const guguns = Object.keys(regions[sido] || {});
+  const [gugun, setGugun] = useCS(def.gugun);
+  const [q, setQ] = useCS("");
+
+  const onSido = (v) => { setSido(v); setGugun(Object.keys(regions[v])[0]); setQ(""); };
+  let list = (regions[sido] && regions[sido][gugun]) || [];
+  const kw = q.trim();
+  if (kw) list = list.filter((s) => s.name.includes(kw) || s.addr.includes(kw));
+
+  const mapHref = (addr) => "https://map.naver.com/v5/search/" + encodeURIComponent(addr);
+
+  return (
+    <div className="finder">
+      <div className="finder__filters">
+        <label className="finder__field">
+          <span className="finder__label">시 / 도</span>
+          <select className="finder__select" value={sido} onChange={(e) => onSido(e.target.value)}>
+            {Object.keys(regions).map((s) => <option key={s} value={s}>{s}</option>)}
+          </select>
+        </label>
+        <label className="finder__field">
+          <span className="finder__label">시 / 군 · 구</span>
+          <select className="finder__select" value={gugun} onChange={(e) => { setGugun(e.target.value); setQ(""); }}>
+            {guguns.map((g) => <option key={g} value={g}>{g}</option>)}
+          </select>
+        </label>
+        <label className="finder__field finder__field--grow">
+          <span className="finder__label">매장명 검색</span>
+          <input className="finder__select" type="text" value={q} placeholder="매장명 또는 주소"
+            onChange={(e) => setQ(e.target.value)} />
+        </label>
+      </div>
+
+      <div className="finder__resulthead">
+        <b>{gugun}</b> · 총 <b className="finder__count">{list.length}</b>개 매장
+      </div>
+
+      <div className="finder__list">
+        {list.length === 0 && (
+          <div className="finder__empty">검색 결과가 없습니다. 다른 지역이나 키워드로 찾아보세요.</div>
+        )}
+        {list.map((s, i) => (
+          <div className="storecard" key={s.name}>
+            <span className="storecard__num">{i + 1}</span>
+            <div className="storecard__body">
+              <div className="storecard__name">{s.name} <span className="storecard__chip">직영점</span></div>
+              <div className="storecard__addr">{s.addr}</div>
+            </div>
+            <div className="storecard__actions">
+              <a className="storebtn storebtn--ghost" href={mapHref(s.addr)} target="_blank" rel="noopener">길찾기</a>
+              <a className="storebtn storebtn--key" href="https://pf.kakao.com/_XlbVX/chat" target="_blank" rel="noopener">방문예약</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 Object.assign(window, {
   IcoBack, IcoArrow, IcoMobile, IcoInternet, IcoChevR, IcoSoccer, Trophy: HonorMark,
-  PhoneMock, RouterMock, VoucherMock, Hero, CrumbBar, InnerBg,
+  PhoneMock, RouterMock, VoucherMock, Hero, CrumbBar, InnerBg, StoreFinder,
 });

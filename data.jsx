@@ -164,10 +164,30 @@ const HERO_SLIDES = [
   },
 ];
 
+/* store finder data (user-provided) — default 경기도 / 고양시 덕양구 */
+const STORE_REGIONS = {
+  "경기도": {
+    "고양시 덕양구": [
+      { name: "화정동 덕양구청점", addr: "경기도 고양시 덕양구 화중로104번길 30" },
+      { name: "성사동 원당시장점", addr: "경기도 고양시 덕양구 호국로790번길 17" },
+    ],
+    "고양시 일산동구": [
+      { name: "장항동 웨스턴돔스퀘어점", addr: "경기도 고양시 일산동구 정발산로 24" },
+    ],
+    "파주시": [
+      { name: "목동동 산내마을점", addr: "경기도 파주시 청암로17번길 31" },
+      { name: "금촌동 금릉지하차도점", addr: "경기도 파주시 금빛로 24-27" },
+    ],
+  },
+};
+const STORE_DEFAULT = { sido: "경기도", gugun: "고양시 덕양구" };
+
 Object.assign(window, {
   MOBILE_PRODUCTS,
   INTERNET_PRODUCTS,
   INTERNET_CHOICES,
   SEASON_PRESETS,
   HERO_SLIDES,
+  STORE_REGIONS,
+  STORE_DEFAULT,
 });
