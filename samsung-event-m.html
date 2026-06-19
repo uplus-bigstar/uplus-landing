@@ -4,57 +4,26 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>삼성전자 감사 페스티벌</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <style type="text/css">
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: #f4f4ed; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
   img { display: block; max-width: 100%; }
-
   .new_evt_wrap { position: relative; width: 100%; margin: 0 auto; background: #f4f4ed; }
   .new_evt_wrap .event_detail { position: relative; }
   .new_evt_wrap .event_detail img { width: 100%; height: auto; }
-  .new_evt_wrap .event_detail.short_section { padding-bottom: 130%; }
-
-  .new_evt_wrap .event_detail .event_detail_btn { display: block; position: absolute; text-indent: -999999px; overflow: hidden; }
-
-  /* tab */
-  .event_detail.tab { display: flex; height: 50px; }
-  .event_detail.tab button { height: 50px; background: #ff2e98; width: calc(100% / 3); text-indent: 0 !important; border: 0; border-right: 1px solid #fff; cursor: pointer; }
-  .event_detail.tab button:last-child { border-right: 0; }
-  .event_detail.tab button:hover { outline: 2px solid #ff2e98; background: #fff; }
-  .event_detail.tab button:hover span { color: #ff2e98; }
-  .event_detail.tab button span { color: #fff; text-align: center; font-family: Pretendard; font-size: 14px; font-weight: 700; line-height: normal; letter-spacing: -0.5px; }
-
-  .tabs_conts_wrap { position: relative; }
-  .tabs_conts_wrap_inner { position: absolute; width: 90%; height: 2.2%; top: 6.7%; left: 50%; transform: translate(-50%); }
-  .tabs_conts_wrap_inner.first-tab-active { height: 4.4%; top: 13.8%; }
-  .tabs_detail_a { cursor: pointer; background: transparent; border: 0; }
-
-  .video-container { overflow: hidden; position: absolute; width: 80%; height: 41.2%; cursor: pointer; margin: 0 auto; border-radius: 0; top: 12%; left: 50%; transform: translate(-50%); }
-  .video-container.shorts2 { top: 55.5%; }
-  .video-container img, .video-container iframe { width: 100%; height: 100%; }
-
-  .event_detail_btn.top_btn { top: 2.7%; left: 50%; width: 84%; height: 1.5%; transform: translateX(-50%); }
-  .event_detail_btn.top_btn.second-tab { top: 5.5%; height: 3.2%; }
-
-  /* 유의사항 */
-  .footerWrap { background: #22171c; padding: 40px 20px; }
-  .footerWrap .notice-wrap { padding: 0; }
-  .footerWrap .notice-wrap .guide__title { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font-size: 18px; font-weight: 700; line-height: 28px; color: #fff; }
-  .footerWrap .notice-wrap .guide__list { display: flex; flex-direction: column; gap: 12px; }
-  .notice-wrap .guide__item { background: #fff; border-radius: 16px; border: 1px solid #dce0e5; overflow: hidden; }
-  .footerWrap .notice-wrap .guide__item .item__title { display: flex; align-items: center; justify-content: space-between; gap: 16px; position: relative; width: 100%; padding: 20px; font-size: 15px; font-weight: 600; line-height: 22px; text-align: left; color: #000; background: #fff; border: 0; cursor: pointer; }
-  .footerWrap .notice-wrap .guide__item .item__title::after { content: ""; display: block; flex: none; width: 22px; height: 22px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%23161616' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat 50% / 100% 100%; transition: transform .3s; }
-  .footerWrap .notice-wrap .guide__item .item__title.not-collapsed::after { transform: rotate(180deg); }
-  .footerWrap .notice-wrap .guide__item .item__content { position: relative; padding: 16px 20px 20px; word-break: break-all; font-size: 13px; font-weight: 500; line-height: 20px; }
-  .footerWrap .notice-wrap .guide__item .item__content::before { content: ""; display: block; position: absolute; top: 0; left: 16px; right: 16px; height: 1px; background: #e5e5e5; }
-  .footerWrap .notice-wrap .collapse { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-  [class*="item-bullet-type-"] { font-size: 13px; font-weight: 500; color: #66707a; margin: 0; padding-left: 4px; list-style: none; }
-  [class*="item-bullet-type-circle"] > li { padding-left: 10px; position: relative; }
-  [class*="item-bullet-type-circle"] > li + li { margin-top: 4px; }
-  [class*="item-bullet-type-circle"] > li:before { content: ""; position: absolute; top: 8px; left: 0; width: 3px; height: 3px; background-color: #66707a; border-radius: 50%; }
-  [class*="item-bullet-type-circle"] > li.no-tit:before { display: none; }
-  .event_detail_btn span { display: block; }
-  .tabs_conts { position: relative; }
+  .buy_bar { display: flex; }
+  .buy_bar button {
+    height: 56px; width: 100%; background: #ff2e98; border: 0; cursor: pointer;
+    color: #fff; font-family: Pretendard; font-size: 16px; font-weight: 700; letter-spacing: -0.5px;
+    transition: .15s;
+  }
+  .buy_bar button:hover { background: #fff; color: #ff2e98; outline: 2px solid #ff2e98; }
+  .onnuri { position: relative; }
+  .onnuri-cover { position: absolute; top: 0; left: 0; right: 0; height: 32%; background: #F2F2EB; }
+  .onnuri-title { position: absolute; top: 9%; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .onnuri-title b { font-family: Pretendard; font-weight: 700; color: #2a2024; font-size: 26px; letter-spacing: -1px; line-height: 1; }
+  .onnuri-title span { font-family: Pretendard; font-weight: 600; color: #2a2024; font-size: 14px; letter-spacing: -0.5px; }
 </style>
 </head>
 <body>
@@ -64,158 +33,20 @@
     <img alt="삼성전자 X LG유플러스 - 국민과 함께, 삼성전자 감사 페스티벌 2026.06.08~07.05" src="https://image.lguplus.com/static/mb-contents/images/fcmm/cnts/imge/20260608-085117-209-FrsxqydM.png" />
   </div>
 
-  <!-- 앵커 탭 영역 -->
-  <div class="event_detail tab">
-    <button id="s-btn" type="button" onclick="goTab('tabs001', this)" aria-selected="true"><span>S26 시리즈</span></button>
-    <button id="z-btn" type="button" onclick="goTab('tabs002', this)" aria-selected="false"><span>Z Flip7 &amp; Z Fold7</span></button>
-    <button id="e-btn" type="button" onclick="goTab('tabs003', this)" aria-selected="false"><span>S25 Edge 외</span></button>
+  <!-- 휴대폰 구매하기 -->
+  <div class="buy_bar">
+    <button type="button" onclick="goBuy()">휴대폰 구매하기</button>
   </div>
 
   <!-- 디지털 온누리상품권 증정 -->
   <div class="event_detail">
     <img alt="삼성전자 감사 페스티벌 혜택 - 디지털 온누리상품권 증정" src="https://image.lguplus.com/static/mb-contents/images/fcmm/cnts/imge/20260612-010419-713-q7jZnvT2.png" />
   </div>
-
-  <!-- 체감가 탭 영역 -->
-  <div class="event_detail tabs_conts_wrap" id="anchor01">
-    <a class="event_detail_btn top_btn" target="_blank" rel="noopener" href="https://www.lguplus.com/support/online/faq"><span>그 외 모델별 디지털 온누리상품권 금액 보러가기</span></a>
-    <div aria-labelledby="tabs001" class="tabs_conts" id="tabs001" role="tabpanel" style="display: block">
-      <img alt="갤럭시 S26 시리즈 체감가" src="https://image.lguplus.com/static/mb-contents/images/fcmm/cnts/imge/20260609-100816-932-y26OnDfm.png" />
-      <a class="event_detail_btn" target="_blank" rel="noopener" href="https://www.lguplus.com/mobile/device/samsung/galaxy-s26ultra-256gb/SM-S948N256?dcntKdCd=5&urcMblPpCd=LPZ1006510&mblUrcMenuId=M20057&entrKdCd=2&cprtCardNo=1031" style="top: 23.6%; left: 50%; width: 45.5%; height: 1.7%; transform: translateX(-50%)"><span>갤럭시 S26 Ultra 256GB 체감가로 구매하기</span></a>
-      <a class="event_detail_btn" target="_blank" rel="noopener" href="https://www.lguplus.com/mobile/device/samsung/galaxy-s26ultra-1tb/SM-S948N1TB?dcntKdCd=5&urcMblPpCd=LPZ1006510&mblUrcMenuId=M20057&entrKdCd=2&cprtCardNo=1031" style="top: 40.7%; left: 50%; width: 45.5%; height: 1.7%; transform: translateX(-50%)"><span>갤럭시 S26 Ultra 1TB 체감가로 구매하기</span></a>
-      <a class="event_detail_btn" target="_blank" rel="noopener" href="https://www.lguplus.com/mobile/device/samsung/galaxy-s26plus-256gb/SM-S947N256?dcntKdCd=5&urcMblPpCd=LPZ1006510&mblUrcMenuId=M20057&entrKdCd=2&cprtCardNo=1031" style="top: 57.7%; left: 50%; width: 45.5%; height: 1.7%; transform: translateX(-50%)"><span>갤럭시 S26+ 256GB 체감가로 구매하기</span></a>
-      <a class="event_detail_btn" target="_blank" rel="noopener" href="https://www.lguplus.com/mobile/device/samsung/galaxy-s26plus-512gb/SM-S947N512?dcntKdCd=5&urcMblPpCd=LPZ1006510&mblUrcMenuId=M20057&entrKdCd=2&cprtCardNo=1031" style="top: 74.7%; left: 50%; width: 45.5%; height: 1.7%; transform: translateX(-50%)"><span>갤럭시 S26+ 512GB 체감가로 구매하기</span></a>
-      <a class="event_detail_btn" target="_blank" rel="noopener" href="https://www.lguplus.com/mobile/device/samsung/galaxy-s26-256gb/SM-S942N256?dcntKdCd=5&urcMblPpCd=LPZ1006510&mblUrcMenuId=M20057&entrKdCd=2&cprtCardNo=1031" style="top: 91.8%; left: 50%; width: 45.5%; height: 1.7%; transform: translateX(-50%)"><span>갤럭시 S26 256GB 체감가로 구매하기</span></a>
-    </div>
-    <div aria-labelledby="tabs002" class="tabs_conts" id="tabs002" role="tabpanel" style="display: none">
-      <img alt="갤럭시 Z Flip7 & Z Fold7 체감가" src="https://image.lguplus.com/static/mb-contents/images/fcmm/cnts/imge/20260609-092334-200-wXxuIzi6.png" />
-      <a class="event_detail_btn" target="_blank" rel="noopener" href="https://www.lguplus.com/mobile/device/samsung/galaxy-z-flip7-256gb/SM-F766N256?dcntKdCd=5&urcMblPpCd=LPZ1006510&mblUrcMenuId=M20057&entrKdCd=2&cprtCardNo=1031" style="top: 48.1%; left: 50%; width: 45.5%; height: 3.7%; transform: translateX(-50%)"><span>갤럭시 Z Flip7 256GB 체감가로 구매하기</span></a>
-      <a class="event_detail_btn" target="_blank" rel="noopener" href="https://www.lguplus.com/mobile/device/samsung/galaxy-z-fold7-256gb/SM-F966N256?dcntKdCd=5&urcMblPpCd=LPZ1006510&mblUrcMenuId=M20057&entrKdCd=2&cprtCardNo=1031" style="top: 83.2%; left: 50%; width: 45.5%; height: 3.7%; transform: translateX(-50%)"><span>갤럭시 Z Fold7 256GB 체감가로 구매하기</span></a>
-    </div>
-    <div aria-labelledby="tabs003" class="tabs_conts" id="tabs003" role="tabpanel" style="display: none">
-      <img alt="갤럭시 S25 Edge 외 체감가" src="https://image.lguplus.com/static/mb-contents/images/fcmm/cnts/imge/20260609-092349-874-pgVwsllo.png" />
-      <a class="event_detail_btn" target="_blank" rel="noopener" href="https://www.lguplus.com/mobile/device/samsung/galaxy-s25-edge-256gb/SM-S937N256?dcntKdCd=5&urcMblPpCd=LPZ1006510&mblUrcMenuId=M20057&entrKdCd=2&cprtCardNo=1031" style="top: 47.6%; left: 50%; width: 45.5%; height: 3.7%; transform: translateX(-50%)"><span>갤럭시 S25 Edge 256GB 체감가로 구매하기</span></a>
-      <a class="event_detail_btn" target="_blank" rel="noopener" href="https://www.lguplus.com/mobile/device/samsung/galaxy-buddy5/SM-A176L?dcntKdCd=2&urcMblPpCd=LPZ1006510&mblUrcMenuId=M20057&entrKdCd=2&cprtCardNo=1031" style="top: 83.2%; left: 50%; width: 45.5%; height: 3.7%; transform: translateX(-50%)"><span>갤럭시 Buddy5 128GB 체감가로 구매하기</span></a>
-    </div>
-  </div>
-
-  <!-- 더블 페이백 영역 -->
-  <div class="event_detail">
-    <img alt="U+공식온라인스토어 단독 더블 페이백 최대 558,000원" src="https://image.lguplus.com/static/mb-contents/images/fcmm/cnts/imge/20260608-102037-651-C38STkeC.png" />
-  </div>
-
-  <!-- 네이버페이 10만원 -->
-  <div class="event_detail">
-    <img alt="쓰던 폰 반납하고 네이버페이 받기" src="https://image.lguplus.com/static/mb-contents/images/fcmm/cnts/imge/20260609-105316-069-nHkChM7Z.png" />
-    <a class="event_detail_btn" target="_blank" rel="noopener" href="https://sell-o.kr/events/ons_sf_2026?event=onsc" style="top: 84.2%; left: 50%; width: 66.5%; height: 4.7%; transform: translateX(-50%)"><span>쓰던 폰 반납하고 네이버페이 받기</span></a>
-  </div>
-
-  <!-- 디지털 온누리상품권 신청방법 쇼츠 -->
-  <div class="event_detail short_section">
-    <img alt="디지털 온누리상품권 신청방법" src="https://image.lguplus.com/static/mb-contents/images/fcmm/cnts/imge/20260608-085259-275-vonUnluy.png" />
-    <div class="video-container" onclick="playVideo()">
-      <img id="thumbnail" src="https://image.lguplus.com/static/mb-contents/images/fcmm/cnts/imge/20260608-085331-395-gwxn9I5P.png" alt="쇼츠 썸네일" />
-      <iframe id="youtubeIframe" style="display:none" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
-    <div class="video-container shorts2" onclick="playVideo2()">
-      <img id="thumbnail2" src="https://image.lguplus.com/static/mb-contents/images/fcmm/cnts/imge/20260616-030253-676-ZTXONO0J.png" alt="쇼츠 썸네일 2" />
-      <iframe id="youtubeIframe2" style="display:none" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
-  </div>
-
-  <!-- 유의사항 -->
-  <div class="footerWrap">
-    <div class="notice-wrap">
-      <div class="guide__wrap">
-        <p class="guide__title">꼭 확인하세요!</p>
-        <ul class="guide__list">
-          <li class="guide__item">
-            <button class="item__title">공통 유의사항</button>
-            <div class="collapse"><div class="item__content"><ul class="item-bullet-type-circle">
-              <li>본 이벤트는 ㈜삼성전자에서 주관하는 이벤트로, 본 이벤트 페이지에 기재되어 있지 않은 내용과 관련한 문의는 삼성닷컴 고객센터(1588-3366)로 문의주셔야 해요.(통화요금: 발신자 부담)</li>
-              <li>본 이벤트는 ㈜삼성전자에서 주관하는 이벤트로, 제조사의 사정에 따라 이벤트 내용이 변경 될 수 있어요.</li>
-              <li>신청자 기준으로 품목당 최대 2대까지 혜택을 받으실 수 있어요.</li>
-              <li>사은품으로 지급되는 디바이스는 이벤트 혜택 대상이 아니에요.</li>
-              <li>본 이벤트페이지는 U+공식온라인스토어에서 구매/개통한 품목에 대한 이벤트페이지에요. 매장 등 오프라인 채널에서 구매/개통한 품목은 구매/개통하신 판매처의 가이드에 따라 진행하셔야 해요.</li>
-              <li>구매한 기기로 삼성닷컴 앱에 접속 후 신청하셔야 해요.</li>
-              <li>본 이벤트에 참여하시려면 개통한 단말로 삼성닷컴 앱 접속 시, 로그인 및 멤버십에 필수로 가입하셔야 해요.</li>
-              <li>개인 명의 휴대폰 번호로 본인인증이 가능해야 이벤트에 참여하실 수 있고, 법인 명의 구매 건으로는 이벤트에 참여하실 수 없어요.</li>
-              <li>구매자와 이벤트 신청자 정보가 동일해야 하고 대리 신청은 불가해요.</li>
-              <li>중고 및 진열 단말을 구매하셨을 경우 혜택 대상에서 제외돼요.</li>
-            </ul></div></div>
-          </li>
-          <li class="guide__item">
-            <button class="item__title">경품 유의사항</button>
-            <div class="collapse"><div class="item__content"><ul class="item-bullet-type-circle">
-              <li>발급받은 디지털온누리 상품권은 '디지털 온누리 App'에서 확인 하실 수 있어요.</li>
-              <li>유효기간은 발행일로부터 5년이에요.</li>
-              <li>디지털 온누리 App'에서 카드 등록도 가능하며, 등록한 카드로 결제 시 온누리 상품권 금액이 먼저 차감 돼요.</li>
-              <li>온누리상품권은 신청일로부터 30일 이내 지급 돼요. 혜택 지급이 확정되면 삼성닷컴에서 알림톡을 발송 해드려요.</li>
-              <li>본 이벤트를 통해 지급받은 상품권은 선물이나 양도가 불가해요.</li>
-              <li>제품 반품 시에는 상품권 회수가 원칙이에요.</li>
-            </ul></div></div>
-          </li>
-          <li class="guide__item">
-            <button class="item__title">[삼성닷컴] 이벤트 유의사항</button>
-            <div class="collapse"><div class="item__content"><ul class="item-bullet-type-circle">
-              <li>본 이벤트 내용은 당사 사정에 따라 예고 없이 변경 또는 중단될 수 있습니다.</li>
-              <li>사은품 및 제품 이미지는 연출된 이미지이며 실제와 다를 수 있습니다.</li>
-              <li>사은품은 재고 소진 시 제한된 품목, 컬러로 운영됩니다.</li>
-              <li>고객이 잘못 입력한 정보로 인한 혜택 미제공은 당사가 책임지지 않습니다.</li>
-              <li>해외에서 구매한 단말은 프로모션 대상이 아니며 해외 USIM 사용 시 프로모션 참여가 불가합니다.</li>
-              <li>개통 후 14일 내 취소 시 제공받은 혜택(사은품 등)을 반납하셔야 합니다.</li>
-              <li>이벤트 참여 및 혜택 관련 문의: 삼성전자 고객센터 1588-3366</li>
-              <li>해외직구, 병행수입 및 중고제품, 진열 단말은 제외됩니다.</li>
-            </ul></div></div>
-          </li>
-          <li class="guide__item">
-            <button class="item__title">셀로 쓰던폰 추가 보상</button>
-            <div class="collapse"><div class="item__content"><ul class="item-bullet-type-circle">
-              <li>추가보상 관련 문의는 셀로 내 1:1 문의를 통해 문의주시기 바랍니다.</li>
-              <li>추가보상 기간 내 U+공식온라인스토어에서 프로모션 대상 모델 개통 및 셀로에 중고폰 판매 신청을 완료하셔야 대상자에 포함됩니다.</li>
-              <li>프로모션 대상 모델 개통 후 14일 개통 유지를 하신 경우에만 지급됩니다.</li>
-              <li>추가보상은 네이버페이로 지급됩니다.</li>
-              <li>해외에서 구매한 중고폰은 판매하실 수 없습니다.</li>
-            </ul></div></div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
 </div>
 
 <script type="text/javascript">
-  function goTab(id, btn) {
-    document.querySelectorAll(".tabs_conts").forEach(function (c) { c.style.display = "none"; });
-    var el = document.getElementById(id);
-    if (el) el.style.display = "block";
-    document.querySelectorAll(".event_detail.tab button").forEach(function (b) { b.setAttribute("aria-selected", "false"); });
-    if (btn) btn.setAttribute("aria-selected", "true");
-    var anchor = document.getElementById("anchor01");
-    if (anchor) anchor.scrollIntoView({ behavior: "smooth" });
-  }
-  document.querySelectorAll(".item__title").forEach(function (title) {
-    title.addEventListener("click", function () {
-      var collapse = title.nextElementSibling;
-      var open = title.classList.contains("not-collapsed");
-      document.querySelectorAll(".item__title.not-collapsed").forEach(function (t) {
-        if (t !== title) { t.classList.remove("not-collapsed"); t.nextElementSibling.style.maxHeight = "0px"; }
-      });
-      if (open) { title.classList.remove("not-collapsed"); collapse.style.maxHeight = "0px"; }
-      else { title.classList.add("not-collapsed"); collapse.style.maxHeight = collapse.scrollHeight + "px"; }
-    });
-  });
-  function playVideo() {
-    document.getElementById("thumbnail").style.display = "none";
-    var f = document.getElementById("youtubeIframe");
-    f.style.display = "block";
-    f.src = "https://www.youtube.com/embed/0KMqJ7VP94U?autoplay=1&mute=1&playsinline=1";
-  }
-  function playVideo2() {
-    document.getElementById("thumbnail2").style.display = "none";
-    var f = document.getElementById("youtubeIframe2");
-    f.style.display = "block";
-    f.src = "https://www.youtube.com/embed/mlXsr9GrApg?autoplay=1&mute=1&playsinline=1";
+  function goBuy() {
+    try { window.parent.postMessage({ uplus: "goCarrier" }, "*"); } catch (e) {}
   }
 </script>
 </body>

@@ -112,6 +112,17 @@ function App() {
 
   useE(() => { window.scrollTo(0, 0); }, [stack.length]);
 
+  useE(() => {
+    const onMsg = (e) => {
+      if (e.data && e.data.uplus === "goCarrier") {
+        setLinkModal(null);
+        setStack((s) => [...s, { screen: "carrier", ctx: {} }]);
+      }
+    };
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
+
   const [toast, setToast] = useS("");
   const toastTimer = useR(null);
   const onOrder = (label) => {
