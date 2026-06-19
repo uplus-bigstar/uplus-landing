@@ -127,7 +127,7 @@ function App() {
     document.documentElement.style.setProperty("--accent-soft", preset.soft);
   }, [preset]);
 
-  const props = { preset, go, back, ctx: cur.ctx, onOrder, onCta, onEvent: () => setEventOpen(true) };
+  const props = { preset, go, back, ctx: cur.ctx, onOrder, onCta, onEvent: () => setEventOpen(true), onStore: () => setStoreOpen(true) };
   let view = null;
   switch (cur.screen) {
     case "landing":        view = <LandingScreen {...props} />; break;

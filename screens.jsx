@@ -79,7 +79,7 @@ function CarrierScreen({ go, back }) {
 }
 
 /* ============ 3. Mobile products ============ */
-function MobilePCard({ p, onOrder }) {
+function MobilePCard({ p, onOrder, onStore }) {
   const [capOn, setCapOn] = useScS(p.capOn);
   return (
     <div className="pcard">
@@ -110,11 +110,12 @@ function MobilePCard({ p, onOrder }) {
       </div>
       <div className="total"><span className="total__label">월</span><span className="total__v">{p.total}</span></div>
       <button className="btn btn--key-outline" onClick={() => onOrder(p.name)}>카카오톡 상담하기</button>
+      <button className="btn btn--ghost pcard__storebtn" onClick={() => onStore && onStore()}>매장방문 예약하기</button>
     </div>
   );
 }
 
-function MobileProductsScreen({ ctx, back, onOrder }) {
+function MobileProductsScreen({ ctx, back, onOrder, onStore }) {
   const carrier = ctx.carrier || "U+";
   return (
     <div>
@@ -129,7 +130,7 @@ function MobileProductsScreen({ ctx, back, onOrder }) {
             <div className="notice"><IcoArrow /> 번호이동 시 추가 전환지원금까지 함께 받을 수 있어요.</div>
           )}
           <div className="pgrid pgrid--4">
-            {MOBILE_PRODUCTS.map((p) => <MobilePCard key={p.id} p={p} onOrder={onOrder} />)}
+            {MOBILE_PRODUCTS.map((p) => <MobilePCard key={p.id} p={p} onOrder={onOrder} onStore={onStore} />)}
           </div>
           <p className="note">월 납부금액은 데이터플랜MAX, 24개월 할부 기준 예상 금액입니다. 실제 금액은 가입 조건에 따라 달라질 수 있습니다.</p>
         </div>
