@@ -496,6 +496,7 @@ input.finder__select { cursor: text; }
   .heroslide .hero__bg { display: none; }
   .heroslide .hero__inner { display: none; }
   .hero__bg-m { display: block; width: 100%; height: auto; cursor: pointer; }
+  .herorail__arrow { display: none; }
   .heroslide .hero, .hero--allinone, .hero--samsung, .hero--festival { height: auto !important; background: #fff; }
   .web-header__inner { gap: 8px; padding: 0 14px; }
   .web-header__brand { gap: 7px; }
@@ -540,7 +541,12 @@ input.finder__select { cursor: text; }
   .section { padding: 36px 0 56px; }
   .pgrid--4, .pgrid--3 { grid-template-columns: 1fr; }
   .choices { flex-direction: column; align-items: stretch; }
-  .choice { max-width: none; }
+  .choice { max-width: none; flex-direction: row; align-items: center; gap: 18px; padding: 22px 52px 22px 20px; }
+  .choice__ico { flex: 0 0 auto; width: 60px; height: 60px; }
+  .choice__label { font-size: 20px; }
+  .choice__desc { font-size: 14px; }
+  .choice__arrow { right: 22px; top: 50%; transform: translateY(-50%); }
+  .choice:hover .choice__arrow { transform: translateY(-50%) translateX(3px); }
 }
 @media (max-width: 380px) {
   /* very narrow phones: stack crumb so steps don't crowd the back button */

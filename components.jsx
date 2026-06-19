@@ -120,19 +120,37 @@ function HeroCarousel({ onCta, navTo, onEvent }) {
   const [idx, setIdx] = useCS(0);
   const n = slides.length;
   const go = (i) => setIdx((i + n) % n);
-  useCE(() => {
-    const t = setInterval(() => setIdx((p) => (p + 1) % n), 5000);
-    return () => clearInterval(t);
-  }, [n]);
+  const touch = useCR({ x: 0, y: 0, swiped: false });
+  const autoRef = useCR(null);
+  const resetAuto = () => {
+    clearInterval(autoRef.current);
+    autoRef.current = setInterval(() => setIdx((p) => (p + 1) % n), 5000);
+  };
+  useCE(() => { resetAuto(); return () => clearInterval(autoRef.current); }, [n]);
+  const onTouchStart = (e) => {
+    const t = e.touches[0];
+    touch.current = { x: t.clientX, y: t.clientY, swiped: false };
+  };
+  const onTouchEnd = (e) => {
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touch.current.x;
+    const dy = t.clientY - touch.current.y;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+      touch.current.swiped = true;
+      go(idx + (dx < 0 ? 1 : -1));
+      resetAuto();
+    }
+  };
+  const guard = (fn) => () => { if (touch.current.swiped) { touch.current.swiped = false; return; } fn && fn(); };
 
   return (
-    <div className="herorail">
+    <div className="herorail" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
       <div className="herorail__track" style={{ transform: `translateX(-${idx * 100}%)` }}>
         {/* 1. festival (current) */}
         <div className="heroslide">
           <div className="hero hero--festival">
             <img className="hero__bg" src="hero-banner.png" alt="2026 세계 축구대회 & 호국보훈의 달 기념 페스티벌" />
-            <img className="hero__bg-m" src="banner1-m.png" alt="2026 세계 축구대회 & 호국보훈의 달 기념 페스티벌" onClick={() => onEvent && onEvent()} />
+            <img className="hero__bg-m" src="banner1-m.png" alt="2026 세계 축구대회 & 호국보훈의 달 기념 페스티벌" onClick={guard(onEvent)} />
             <div className="hero__inner">
               <div className="hero__text">
                 <h1 className="hero__title">
@@ -152,7 +170,7 @@ function HeroCarousel({ onCta, navTo, onEvent }) {
         <div className="heroslide">
           <div className="hero hero--samsung">
             <img className="hero__bg" src="banner2.png" alt="국민과 함께, 삼성전자 감사 페스티벌" />
-            <img className="hero__bg-m" src="banner2-m.png" alt="갤럭시 사면 디지털 온누리 상품권 혜택" onClick={() => window.open(slides[1].href, "_blank", "noopener")} />
+            <img className="hero__bg-m" src="banner2-m.png" alt="갤럭시 사면 디지털 온누리 상품권 혜택" onClick={guard(() => window.open(slides[1].href, "_blank", "noopener"))} />
             <div className="hero__inner">
               <div className="hero__text">
                 <h1 className="hero__title">갤럭시 사면<br />디지털 온누리 상품권 혜택</h1>
@@ -169,7 +187,7 @@ function HeroCarousel({ onCta, navTo, onEvent }) {
         <div className="heroslide">
           <div className="hero hero--allinone">
             <img className="hero__bg hero__bg--b3" src="banner3.png" alt="모바일 + 인터넷 올인원 결합 할인" />
-            <img className="hero__bg-m" src="banner3-m.png" alt="따로 가입 10만원대 vs 올인원 할인하면 7만원대" onClick={() => navTo && navTo("netProducts", { kind: "allinone" })} />
+            <img className="hero__bg-m" src="banner3-m.png" alt="따로 가입 10만원대 vs 올인원 할인하면 7만원대" onClick={guard(() => navTo && navTo("netProducts", { kind: "allinone" }))} />
             <div className="hero__inner">
               <div className="hero__text">
                 <h1 className="hero__title b3title">
