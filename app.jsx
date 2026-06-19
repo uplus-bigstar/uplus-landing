@@ -49,10 +49,11 @@ function StoreModal({ onClose }) {
   );
 }
 
-const EVENT_URL = "https://www.uplusevent.co.kr/visit?utm_source=lgupluscom";
-function EventModal({ onClose }) {
+function EventModal({ url, title, wide, onClose }) {
   const [blocked, setBlocked] = useS(false);
   const loaded = useR(false);
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 600px)").matches;
+  const src = (isMobile && url === "samsung-event.html") ? "samsung-event-m.html" : url;
   useE(() => {
     const onKey = (e) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", onKey);
@@ -62,22 +63,22 @@ function EventModal({ onClose }) {
   }, []);
   return (
     <div className="modal" onClick={onClose}>
-      <div className="modal__panel modal__panel--narrow" onClick={(e) => e.stopPropagation()}>
+      <div className={"modal__panel " + (wide ? "modal__panel--wide" : "modal__panel--narrow")} onClick={(e) => e.stopPropagation()}>
         <div className="modal__bar">
-          <span className="modal__title">U+ 6월 페스티벌 이벤트</span>
+          <span className="modal__title">{title}</span>
           <div className="modal__bar-actions">
-            <a className="modal__open" href={EVENT_URL} target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+            <a className="modal__open" href={url} target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
             <button className="modal__close" onClick={onClose} aria-label="닫기">✕</button>
           </div>
         </div>
         <div className="modal__body">
-          <iframe className="modal__frame" src={EVENT_URL} title="이벤트 참여"
+          <iframe className="modal__frame" src={src} title={title}
             onLoad={() => { loaded.current = true; }} />
           {blocked && (
             <div className="modal__fallback">
               <p className="modal__fallback-t">이 페이지는 보안 정책상 팝업 안에서 열리지 않을 수 있어요.</p>
-              <p className="modal__fallback-s">아래 버튼으로 이벤트 페이지를 새 탭에서 열어주세요.</p>
-              <a className="btn btn--key-fill" style={{ width: "auto", padding: "13px 26px" }} href={EVENT_URL} target="_blank" rel="noopener">이벤트 참여하기 ↗</a>
+              <p className="modal__fallback-s">아래 버튼으로 페이지를 새 탭에서 열어주세요.</p>
+              <a className="btn btn--key-fill" style={{ width: "auto", padding: "13px 26px" }} href={url} target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
             </div>
           )}
         </div>
@@ -102,7 +103,7 @@ function App() {
   const preset = (window.SEASON_PRESETS[t.season] || window.SEASON_PRESETS["조화"]);
 
   const [storeOpen, setStoreOpen] = useS(false);
-  const [eventOpen, setEventOpen] = useS(false);
+  const [linkModal, setLinkModal] = useS(null);
   const [stack, setStack] = useS([{ screen: "landing", ctx: {} }]);
   const cur = stack[stack.length - 1];
   const go = (screen, ctx = {}) => { setStack((s) => [...s, { screen, ctx }]); };
@@ -127,7 +128,10 @@ function App() {
     document.documentElement.style.setProperty("--accent-soft", preset.soft);
   }, [preset]);
 
-  const props = { preset, go, back, ctx: cur.ctx, onOrder, onCta, onEvent: () => setEventOpen(true), onStore: () => setStoreOpen(true) };
+  const props = { preset, go, back, ctx: cur.ctx, onOrder, onCta,
+    onEvent: () => setLinkModal({ url: "https://www.uplusevent.co.kr/visit?utm_source=lgupluscom", title: "U+ 6월 페스티벌 이벤트" }),
+    onLink: (url, title, wide) => setLinkModal({ url, title, wide }),
+    onStore: () => setStoreOpen(true) };
   let view = null;
   switch (cur.screen) {
     case "landing":        view = <LandingScreen {...props} />; break;
@@ -146,7 +150,7 @@ function App() {
       <WebFooter />
       <div className={"toast" + (toast ? " is-on" : "")}>{toast}</div>
       {storeOpen && <StoreModal onClose={() => setStoreOpen(false)} />}
-      {eventOpen && <EventModal onClose={() => setEventOpen(false)} />}
+      {linkModal && <EventModal url={linkModal.url} title={linkModal.title} wide={linkModal.wide} onClose={() => setLinkModal(null)} />}
 
       <TweaksPanel title="Tweaks">
         <TweakSection label="6월 시즌 테마" />

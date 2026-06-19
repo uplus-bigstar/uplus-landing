@@ -111,7 +111,7 @@ const HEART_SVG = (
   </svg>
 );
 
-function HeroCarousel({ onCta, navTo, onEvent }) {
+function HeroCarousel({ onCta, navTo, onEvent, onLink }) {
   const slides = [
     { id: "festival", kind: "festival" },
     { id: "samsung", kind: "samsung", href: "https://www.lguplus.com/benefit-event/ongoing/82329" },
@@ -170,12 +170,12 @@ function HeroCarousel({ onCta, navTo, onEvent }) {
         <div className="heroslide">
           <div className="hero hero--samsung">
             <img className="hero__bg" src="banner2.png" alt="국민과 함께, 삼성전자 감사 페스티벌" />
-            <img className="hero__bg-m" src="banner2-m.png" alt="갤럭시 사면 디지털 온누리 상품권 혜택" onClick={guard(() => window.open(slides[1].href, "_blank", "noopener"))} />
+            <img className="hero__bg-m" src="banner2-m.png" alt="갤럭시 사면 디지털 온누리 상품권 혜택" onClick={guard(() => onLink && onLink("samsung-event.html", "삼성전자 감사 페스티벌", "wide"))} />
             <div className="hero__inner">
               <div className="hero__text">
                 <h1 className="hero__title">갤럭시 사면<br />디지털 온누리 상품권 혜택</h1>
                 <p className="hero__sub">갤럭시 스마트폰에 워치 or 버즈 더블 혜택까지</p>
-                <button className="hero__cta" onClick={() => window.open(slides[1].href, "_blank", "noopener")}>
+                <button className="hero__cta" onClick={() => onLink && onLink("samsung-event.html", "삼성전자 감사 페스티벌", "wide")}>
                   자세히 보기 <IcoArrow />
                 </button>
               </div>

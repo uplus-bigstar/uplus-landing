@@ -4,10 +4,10 @@
 const { useState: useScS } = React;
 
 /* ============ 1. Landing = hero + funnel ============ */
-function LandingScreen({ go, onCta, onEvent }) {
+function LandingScreen({ go, onCta, onEvent, onLink }) {
   return (
     <div>
-      <Hero onCta={onCta} navTo={go} onEvent={onEvent} />
+      <Hero onCta={onCta} navTo={go} onEvent={onEvent} onLink={onLink} />
       <section id="funnel" className="section">
         <div className="container">
           <div className="step-head">
@@ -16,7 +16,7 @@ function LandingScreen({ go, onCta, onEvent }) {
             <p className="step-head__sub">관심 상품을 고르면 나에게 딱 맞는 <span className="br-m"></span>6월 혜택을 추천해 드려요.</p>
           </div>
           <div className="choices choices--wide">
-            <button className="choice" onClick={() => go("carrier")}>
+            <button className="choice choice--row" onClick={() => go("carrier")}>
               <span className="choice__arrow"><IcoArrow /></span>
               <span className="choice__ico"><IcoMobile /></span>
               <span>
@@ -24,7 +24,7 @@ function LandingScreen({ go, onCta, onEvent }) {
                 <span className="choice__desc">휴대폰 구매 · 요금제 가입</span>
               </span>
             </button>
-            <button className="choice" onClick={() => go("netSelect")}>
+            <button className="choice choice--row" onClick={() => go("netSelect")}>
               <span className="choice__arrow"><IcoArrow /></span>
               <span className="choice__ico"><IcoInternet /></span>
               <span>

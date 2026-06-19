@@ -33,7 +33,7 @@ function InternetSelectScreen({ go, back }) {
 }
 
 /* ============ 5. Internet products ============ */
-function InternetCard({ p, onOrder }) {
+function InternetCard({ p, onOrder, onStore }) {
   return (
     <div className="icard">
       <div className="pcard__topbadges" style={{ flexWrap: "wrap", gap: 6 }}>
@@ -49,6 +49,7 @@ function InternetCard({ p, onOrder }) {
       </div>
 
       <button className="btn btn--key-outline" onClick={() => onOrder("카카오톡 상담하기")}>카카오톡 상담하기</button>
+      <button className="btn btn--ghost pcard__storebtn" onClick={() => onStore && onStore()}>매장방문 예약하기</button>
 
       <div className="benefit-row">
         <div className="benefit-row__k">혜택정보<small>(택1)</small></div>
@@ -75,7 +76,7 @@ function InternetCard({ p, onOrder }) {
   );
 }
 
-function InternetProductsScreen({ ctx, back, onOrder }) {
+function InternetProductsScreen({ ctx, back, onOrder, onStore }) {
   const choice = (INTERNET_CHOICES.find((c) => c.id === ctx.kind) || INTERNET_CHOICES[0]);
   return (
     <div>
@@ -87,7 +88,7 @@ function InternetProductsScreen({ ctx, back, onOrder }) {
             <span className="products-head__c">온라인 단독 할인 · {INTERNET_PRODUCTS.length}개 상품</span>
           </div>
           <div className="pgrid pgrid--3">
-            {INTERNET_PRODUCTS.map((p) => <InternetCard key={p.id} p={p} onOrder={onOrder} />)}
+            {INTERNET_PRODUCTS.map((p) => <InternetCard key={p.id} p={p} onOrder={onOrder} onStore={onStore} />)}
           </div>
           <p className="note">부가세 포함 금액이며, 혜택의 원정액은 3년 약정 기준, 상품의 이용요금은 이용기간 기준입니다.</p>
         </div>
