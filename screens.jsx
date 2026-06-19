@@ -13,7 +13,7 @@ function LandingScreen({ go, onCta }) {
           <div className="step-head">
             <span className="eyebrow">STEP 1 · 상품 선택</span>
             <h2 className="step-head__q">어떤 상품에 관심이 있으신가요?</h2>
-            <p className="step-head__sub">관심 상품을 고르면 나에게 딱 맞는<br className="br-m" />6월 혜택을 추천해 드려요.</p>
+            <p className="step-head__sub">관심 상품을 고르면 나에게 딱 맞는<span className="br-m"></span>6월 혜택을 추천해 드려요.</p>
           </div>
           <div className="choices choices--wide">
             <button className="choice" onClick={() => go("carrier")}>
@@ -48,7 +48,7 @@ function CarrierScreen({ go, back }) {
         <div className="container">
           <div className="step-head">
             <span className="eyebrow">STEP 2 · 모바일</span>
-            <h2 className="step-head__q">현재 사용 중인<br className="br-m" />통신사는 어디인가요?</h2>
+            <h2 className="step-head__q">현재 사용 중인<span className="br-m"></span>통신사는 어디인가요?</h2>
             <p className="step-head__sub">사용 중인 통신사에 맞춰 가입 방법과 추천 단말을 안내해 드려요.</p>
           </div>
           <div className="choices choices--wide">

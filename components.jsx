@@ -50,6 +50,9 @@ const IcoInternet = () => (
 const IcoChevR = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
 );
+const IcoChevL = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+);
 const IcoSoccer = ({ size = 48 }) => (
   <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
     <circle cx="24" cy="24" r="21" fill="#fff" stroke="#1a1a1e" strokeWidth="1.4"/>
@@ -96,25 +99,102 @@ const Confetti = () => (
 );
 
 /* ============================================================
-   Hero — single festive banner (real 3D cutout assets)
+   HeroCarousel — 3 rolling banners
    ============================================================ */
-function Hero({ onCta }) {
+const HEART_SVG = (
+  <svg viewBox="0 0 120 108" fill="none" className="b2heart__svg" aria-hidden="true">
+    <path d="M60 98C30 78 12 60 12 38 12 22 24 12 38 12c9 0 17 4 22 12 5-8 13-12 22-12 14 0 26 10 26 26 0 22-18 40-48 60z"
+      fill="#5b9be0" stroke="#1b3f8f" strokeWidth="2.5" strokeDasharray="3 4" strokeLinecap="round"/>
+    <path d="M60 24c5-8 13-12 22-12 14 0 26 10 26 26 0 22-18 40-48 60V24z"
+      fill="#244ca8" stroke="#10286e" strokeWidth="2.5" strokeDasharray="3 4" strokeLinecap="round"/>
+    <circle cx="33" cy="60" r="6" fill="#244ca8" stroke="#10286e" strokeWidth="2" strokeDasharray="2.5 3.5"/>
+  </svg>
+);
+
+function HeroCarousel({ onCta }) {
+  const slides = [
+    { id: "festival", kind: "festival" },
+    { id: "samsung", kind: "samsung", href: "https://www.lguplus.com/benefit-event/ongoing/82329" },
+    { id: "allinone", kind: "allinone", href: "https://www.lguplus.com/benefit-event/ongoing/82302" },
+  ];
+  const [idx, setIdx] = useCS(0);
+  const n = slides.length;
+  const go = (i) => setIdx((i + n) % n);
+  useCE(() => {
+    const t = setInterval(() => setIdx((p) => (p + 1) % n), 5000);
+    return () => clearInterval(t);
+  }, [n]);
+
   return (
-    <div className="hero">
-      <img className="hero__bg" src="hero-banner.png" alt="2026 세계 축구대회 & 호국보훈의 달 기념 페스티벌" />
-      <div className="hero__inner">
-        <div className="hero__text">
-          <span className="hero__tag">U+ 6월 페스티벌</span>
-          <h1 className="hero__title">
-            <span className="hl-pink">세계 축구대회</span> &amp;<br />
-            <span className="hl-navy">호국 보훈의 달</span> 기념 페스티벌
-          </h1>
-          <p className="hero__sub">온 국민이 함께하는 6월, U+가 준비한 특별 혜택을 만나보세요.</p>
+    <div className="herorail">
+      <div className="herorail__track" style={{ transform: `translateX(-${idx * 100}%)` }}>
+        {/* 1. festival (current) */}
+        <div className="heroslide">
+          <div className="hero hero--festival">
+            <img className="hero__bg" src="hero-banner.png" alt="2026 세계 축구대회 & 호국보훈의 달 기념 페스티벌" />
+            <div className="hero__inner">
+              <div className="hero__text">
+                <h1 className="hero__title">
+                  <span className="hl-pink">세계 축구대회</span> &amp;<br />
+                  <span className="hl-navy">호국 보훈의 달</span> 기념 페스티벌
+                </h1>
+                <p className="hero__sub">온 국민이 함께하는 6월, U+가 준비한 특별 혜택을 만나보세요.</p>
+                <button className="hero__cta" onClick={() => window.open("https://www.uplusevent.co.kr/visit?utm_source=lgupluscom", "_blank", "noopener")}>
+                  이벤트 참여하기 <IcoArrow />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* 2. Samsung 감사 페스티벌 (image + left title) */}
+        <div className="heroslide">
+          <div className="hero hero--samsung">
+            <img className="hero__bg" src="banner2.png" alt="국민과 함께, 삼성전자 감사 페스티벌" />
+            <div className="hero__inner">
+              <div className="hero__text">
+                <h1 className="hero__title">갤럭시 사면<br />디지털 온누리 상품권 혜택</h1>
+                <p className="hero__sub">갤럭시 스마트폰에 워치 or 버즈 더블 혜택까지</p>
+                <button className="hero__cta" onClick={() => window.open(slides[1].href, "_blank", "noopener")}>
+                  자세히 보기 <IcoArrow />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. 올인원 할인 (dark) */}
+        <div className="heroslide">
+          <div className="hero hero--allinone">
+            <img className="hero__bg hero__bg--b3" src="banner3.png" alt="모바일 + 인터넷 올인원 결합 할인" />
+            <div className="hero__inner">
+              <div className="hero__text">
+                <h1 className="hero__title b3title">
+                  따로 가입 요금 10만원대<br /><span className="b3title__hl">vs 올인원 할인하면 7만원대</span>
+                </h1>
+                <p className="hero__sub">모바일 가입 = 인터넷 요금 할인</p>
+                <button className="hero__cta" onClick={() => window.open(slides[2].href, "_blank", "noopener")}>
+                  자세히 보기 <IcoArrow />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button className="herorail__arrow herorail__arrow--prev" onClick={() => go(idx - 1)} aria-label="이전 배너"><IcoChevL /></button>
+      <button className="herorail__arrow herorail__arrow--next" onClick={() => go(idx + 1)} aria-label="다음 배너"><IcoChevR /></button>
+      <div className="herorail__dots">
+        {slides.map((s, i) => (
+          <button key={s.id} className={"herorail__dot" + (i === idx ? " is-on" : "")} onClick={() => go(i)} aria-label={`${i + 1}번 배너`} />
+        ))}
       </div>
     </div>
   );
 }
+
+/* legacy name kept for callers */
+const Hero = HeroCarousel;
 
 /* ---------- crumb / step bar ---------- */
 function CrumbBar({ onBack, step }) {
@@ -154,13 +234,12 @@ function StoreFinder() {
   const guguns = Object.keys(regions[sido] || {});
   const [gugun, setGugun] = useCS(def.gugun);
   const [q, setQ] = useCS("");
+  const [phoneStore, setPhoneStore] = useCS(null);
 
   const onSido = (v) => { setSido(v); setGugun(Object.keys(regions[v])[0]); setQ(""); };
   let list = (regions[sido] && regions[sido][gugun]) || [];
   const kw = q.trim();
   if (kw) list = list.filter((s) => s.name.includes(kw) || s.addr.includes(kw));
-
-  const mapHref = (addr) => "https://map.naver.com/v5/search/" + encodeURIComponent(addr);
 
   return (
     <div className="finder">
@@ -198,14 +277,35 @@ function StoreFinder() {
             <div className="storecard__body">
               <div className="storecard__name">{s.name} <span className="storecard__chip">직영점</span></div>
               <div className="storecard__addr">{s.addr}</div>
+              {s.tel && <div className="storecard__tel">대표번호 {s.tel}</div>}
             </div>
             <div className="storecard__actions">
-              <a className="storebtn storebtn--ghost" href={mapHref(s.addr)} target="_blank" rel="noopener">길찾기</a>
-              <a className="storebtn storebtn--key" href="https://pf.kakao.com/_XlbVX/chat" target="_blank" rel="noopener">방문예약</a>
+              <button className="storebtn storebtn--icon" onClick={() => setPhoneStore(s)} aria-label={s.name + " 전화"}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8a13 13 0 0 0 5.6 5.6l1.9-1.9c.24-.24.59-.32.9-.21 1 .33 2.07.51 3.18.51.5 0 .9.4.9.9V19c0 .5-.4.9-.9.9C9.6 19.9 4.1 14.4 4.1 7.4c0-.5.4-.9.9-.9h3.3c.5 0 .9.4.9.9 0 1.1.18 2.18.51 3.18.1.31.03.66-.21.9l-1.9 1.9z" fill="currentColor"/></svg>
+              </button>
+              <a className="storebtn storebtn--icon" href={"https://map.naver.com/p/search/" + encodeURIComponent(s.addr)} target="_blank" rel="noopener" aria-label={s.name + " 지도"}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2.5c-3.9 0-7 3.04-7 6.8 0 4.9 7 12.2 7 12.2s7-7.3 7-12.2c0-3.76-3.1-6.8-7-6.8z" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round"/><circle cx="12" cy="9.3" r="2.5" fill="currentColor"/></svg>
+              </a>
+              <a className="storebtn storebtn--key" href={s.reserve} target="_blank" rel="noopener">방문예약</a>
             </div>
           </div>
         ))}
       </div>
+
+      {phoneStore && (
+        <div className="phonepop" onClick={() => setPhoneStore(null)}>
+          <div className="phonepop__panel" onClick={(e) => e.stopPropagation()}>
+            <button className="phonepop__close" onClick={() => setPhoneStore(null)} aria-label="닫기">✕</button>
+            <div className="phonepop__ico">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8a13 13 0 0 0 5.6 5.6l1.9-1.9c.24-.24.59-.32.9-.21 1 .33 2.07.51 3.18.51.5 0 .9.4.9.9V19c0 .5-.4.9-.9.9C9.6 19.9 4.1 14.4 4.1 7.4c0-.5.4-.9.9-.9h3.3c.5 0 .9.4.9.9 0 1.1.18 2.18.51 3.18.1.31.03.66-.21.9l-1.9 1.9z" fill="currentColor"/></svg>
+            </div>
+            <div className="phonepop__store">{phoneStore.name}</div>
+            <div className="phonepop__num">{phoneStore.tel}</div>
+            <a className="btn btn--key-fill phonepop__call" href={"tel:" + phoneStore.tel.replace(/-/g, "")}>전화 걸기</a>
+            <p className="phonepop__note">매장 운영시간 내 연결됩니다.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

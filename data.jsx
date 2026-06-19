@@ -168,15 +168,25 @@ const HERO_SLIDES = [
 const STORE_REGIONS = {
   "경기도": {
     "고양시 덕양구": [
-      { name: "화정동 덕양구청점", addr: "경기도 고양시 덕양구 화중로104번길 30" },
-      { name: "성사동 원당시장점", addr: "경기도 고양시 덕양구 호국로790번길 17" },
+      { name: "화정동 덕양구청점", addr: "경기도 고양시 덕양구 화중로104번길 30 한성리즈빌 101호 (화정동)", tel: "070-4036-7550", reserve: "https://m.booking.naver.com/booking/5/bizes/1285216/items/6405086?theme=place&service-target=map-pc&lang=ko&area=plt&map-search=1" },
+      { name: "성사동 원당시장점", addr: "경기 고양시 덕양구 호국로790번길 17 1층 109호 (원당)", tel: "070-4090-2655", reserve: "https://m.booking.naver.com/booking/5/bizes/1295299/items/6404854?area=plt&lang=ko&map-search=1&service-target=map-pc&theme=place" },
+      { name: "관산동 관산점", addr: "경기 고양시 덕양구 통일로 760 1층 (관산동)", tel: "070-4300-7551", reserve: "https://m.booking.naver.com/booking/5/bizes/1295330/items/6404973?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
+      { name: "고양동 고양점", addr: "경기 고양시 덕양구 헤음로34, 1층", tel: "070-4681-2803", reserve: "https://m.booking.naver.com/booking/5/bizes/1295352/items/6405044?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
     ],
     "고양시 일산동구": [
-      { name: "장항동 웨스턴돔스퀘어점", addr: "경기도 고양시 일산동구 정발산로 24" },
+      { name: "장항동 웨스턴돔스퀘어점", addr: "경기 고양시 일산동구 정발산로 24 A동 170호 (장항동, 웨스턴돔)", tel: "070-8285-2655", reserve: "https://m.booking.naver.com/booking/5/bizes/1300561/items/6410207?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
+      { name: "풍동 풍동점", addr: "경기 고양시 일산동구 숲속마을로 26 104 105호 (풍동, 풍동프라자)", tel: "070-7543-2654", reserve: "https://m.booking.naver.com/booking/5/bizes/1300555/items/6410164?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
+      { name: "마두동 백마학원가점", addr: "경기 고양시 일산동구 일산로 207 1층 106,107호 (마두동)", tel: "070-8286-2655", reserve: "https://m.booking.naver.com/booking/5/bizes/1271368/items/6405089?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
+      { name: "백석동 백석역점", addr: "경기 고양시 일산동구 중앙로 1047 106호 (백석동, 영림브레아오피스텔)", tel: "070-5025-2655", reserve: "https://m.booking.naver.com/booking/5/bizes/1295352/items/6405044?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
+    ],
+    "고양시 일산서구": [
+      { name: "대화동 대화역3번출구점", addr: "경기도 고양시 일산서구 중앙로 1573 1층 104호 (대화동, 킨텍스프라자)", tel: "070-5103-2655", reserve: "https://m.booking.naver.com/booking/5/bizes/1286027/items/6402706?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
     ],
     "파주시": [
-      { name: "목동동 산내마을점", addr: "경기도 파주시 청암로17번길 31" },
-      { name: "금촌동 금릉지하차도점", addr: "경기도 파주시 금빛로 24-27" },
+      { name: "목동동 산내마을점", addr: "경기 파주시 청암로17번길 31 (목동동)", tel: "070-8672-5900", reserve: "https://m.booking.naver.com/booking/5/bizes/1285394/items/6367161?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
+      { name: "금촌동 금릉지하차도점", addr: "경기 파주시 금빛로 24-27 109호 (금촌동, 제일메디컬빌딩)", tel: "070-4007-3600", reserve: "https://m.booking.naver.com/booking/5/bizes/1290123/items/6404902?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
+      { name: "동패동 교하사거리점", addr: "경기 파주시 청석로 256 (동패동)", tel: "070-7585-7100", reserve: "https://m.booking.naver.com/booking/5/bizes/1295347/items/6405033?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
+      { name: "다율동 다율사거리점", addr: "경기 파주시 청암로 75 107호, 108호 (다율동, 상상메디컬프라자)", tel: "070-8672-6004", reserve: "https://m.booking.naver.com/booking/5/bizes/1295324/items/6404949?theme=place&service-target=map-pc&lang=ko&area=bmp&map-search=1" },
     ],
   },
 };
