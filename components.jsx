@@ -111,7 +111,7 @@ const HEART_SVG = (
   </svg>
 );
 
-function HeroCarousel({ onCta }) {
+function HeroCarousel({ onCta, navTo, onEvent }) {
   const slides = [
     { id: "festival", kind: "festival" },
     { id: "samsung", kind: "samsung", href: "https://www.lguplus.com/benefit-event/ongoing/82329" },
@@ -139,7 +139,7 @@ function HeroCarousel({ onCta }) {
                   <span className="hl-navy">호국 보훈의 달</span> 기념 페스티벌
                 </h1>
                 <p className="hero__sub">온 국민이 함께하는 6월, U+가 준비한 특별 혜택을 만나보세요.</p>
-                <button className="hero__cta" onClick={() => window.open("https://www.uplusevent.co.kr/visit?utm_source=lgupluscom", "_blank", "noopener")}>
+                <button className="hero__cta" onClick={() => onEvent && onEvent()}>
                   이벤트 참여하기 <IcoArrow />
                 </button>
               </div>
@@ -173,7 +173,7 @@ function HeroCarousel({ onCta }) {
                   따로 가입 요금 10만원대<br /><span className="b3title__hl">vs 올인원 할인하면 7만원대</span>
                 </h1>
                 <p className="hero__sub">모바일 가입 = 인터넷 요금 할인</p>
-                <button className="hero__cta" onClick={() => window.open(slides[2].href, "_blank", "noopener")}>
+                <button className="hero__cta" onClick={() => navTo && navTo("netProducts", { kind: "allinone" })}>
                   자세히 보기 <IcoArrow />
                 </button>
               </div>

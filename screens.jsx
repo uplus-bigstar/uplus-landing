@@ -4,16 +4,16 @@
 const { useState: useScS } = React;
 
 /* ============ 1. Landing = hero + funnel ============ */
-function LandingScreen({ go, onCta }) {
+function LandingScreen({ go, onCta, onEvent }) {
   return (
     <div>
-      <Hero onCta={onCta} />
+      <Hero onCta={onCta} navTo={go} onEvent={onEvent} />
       <section id="funnel" className="section">
         <div className="container">
           <div className="step-head">
             <span className="eyebrow">STEP 1 · 상품 선택</span>
             <h2 className="step-head__q">어떤 상품에 관심이 있으신가요?</h2>
-            <p className="step-head__sub">관심 상품을 고르면 나에게 딱 맞는<span className="br-m"></span>6월 혜택을 추천해 드려요.</p>
+            <p className="step-head__sub">관심 상품을 고르면 나에게 딱 맞는 <span className="br-m"></span>6월 혜택을 추천해 드려요.</p>
           </div>
           <div className="choices choices--wide">
             <button className="choice" onClick={() => go("carrier")}>

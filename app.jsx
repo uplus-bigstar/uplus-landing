@@ -12,7 +12,10 @@ function WebHeader({ onHome, onStore }) {
   return (
     <header className="web-header">
       <div className="web-header__inner">
-        <img className="web-header__logo" src="u-logo.png" alt="U+" style={{ cursor: "pointer" }} onClick={onHome} />
+        <div className="web-header__brand" onClick={onHome}>
+          <img className="web-header__logo" src="u-logo.png" alt="U+" />
+          <span className="web-header__partner">공식 인증 파트너</span>
+        </div>
         <span className="web-header__spacer" />
         <div className="web-header__actions">
           <button className="hbtn hbtn--dark" onClick={onStore}>매장방문 예약</button>
@@ -46,6 +49,43 @@ function StoreModal({ onClose }) {
   );
 }
 
+const EVENT_URL = "https://www.uplusevent.co.kr/visit?utm_source=lgupluscom";
+function EventModal({ onClose }) {
+  const [blocked, setBlocked] = useS(false);
+  const loaded = useR(false);
+  useE(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    const t = setTimeout(() => { if (!loaded.current) setBlocked(true); }, 3500);
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; clearTimeout(t); };
+  }, []);
+  return (
+    <div className="modal" onClick={onClose}>
+      <div className="modal__panel modal__panel--narrow" onClick={(e) => e.stopPropagation()}>
+        <div className="modal__bar">
+          <span className="modal__title">U+ 6월 페스티벌 이벤트</span>
+          <div className="modal__bar-actions">
+            <a className="modal__open" href={EVENT_URL} target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+            <button className="modal__close" onClick={onClose} aria-label="닫기">✕</button>
+          </div>
+        </div>
+        <div className="modal__body">
+          <iframe className="modal__frame" src={EVENT_URL} title="이벤트 참여"
+            onLoad={() => { loaded.current = true; }} />
+          {blocked && (
+            <div className="modal__fallback">
+              <p className="modal__fallback-t">이 페이지는 보안 정책상 팝업 안에서 열리지 않을 수 있어요.</p>
+              <p className="modal__fallback-s">아래 버튼으로 이벤트 페이지를 새 탭에서 열어주세요.</p>
+              <a className="btn btn--key-fill" style={{ width: "auto", padding: "13px 26px" }} href={EVENT_URL} target="_blank" rel="noopener">이벤트 참여하기 ↗</a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function WebFooter() {
   return (
     <footer className="web-footer">
@@ -62,6 +102,7 @@ function App() {
   const preset = (window.SEASON_PRESETS[t.season] || window.SEASON_PRESETS["조화"]);
 
   const [storeOpen, setStoreOpen] = useS(false);
+  const [eventOpen, setEventOpen] = useS(false);
   const [stack, setStack] = useS([{ screen: "landing", ctx: {} }]);
   const cur = stack[stack.length - 1];
   const go = (screen, ctx = {}) => { setStack((s) => [...s, { screen, ctx }]); };
@@ -86,7 +127,7 @@ function App() {
     document.documentElement.style.setProperty("--accent-soft", preset.soft);
   }, [preset]);
 
-  const props = { preset, go, back, ctx: cur.ctx, onOrder, onCta };
+  const props = { preset, go, back, ctx: cur.ctx, onOrder, onCta, onEvent: () => setEventOpen(true) };
   let view = null;
   switch (cur.screen) {
     case "landing":        view = <LandingScreen {...props} />; break;
@@ -105,6 +146,7 @@ function App() {
       <WebFooter />
       <div className={"toast" + (toast ? " is-on" : "")}>{toast}</div>
       {storeOpen && <StoreModal onClose={() => setStoreOpen(false)} />}
+      {eventOpen && <EventModal onClose={() => setEventOpen(false)} />}
 
       <TweaksPanel title="Tweaks">
         <TweakSection label="6월 시즌 테마" />
